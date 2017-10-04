@@ -1,0 +1,10 @@
+.DS_Store
+node_modules
+/01-introduction-to-react/*
+!/01-introduction-to-react/homework
+/02-deep-in-components/*
+!02-deep-in-components/homework
+/03-environment/*
+/04-routing-and-es6/*
+/05-flux/*
+/06-real-world/*

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <title>HW 1</title>
+</head>
+<body>
+<div id='content'></div>
+
+<script type="text/babel">
+    var CONTENT = [
+      {
+        id: 1,
+        title: 'Test',
+        author: 'Admin',
+        thumbnail: 'images/001.png',
+        text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, sint tempora. Ad, adipisci dicta doloribus eaque facilis harum, illo impedit nulla pariatur quia quis quisquam quod repellendus sit temporibus? Molestias!</p>'
+      }, {
+        id: 2,
+        title: 'Test Lorem',
+        author: 'Subscriber',
+        thumbnail: 'images/002.png',
+        text: '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, sint tempora. Ad, adipisci dicta doloribus eaque facilis harum, illo impedit nulla pariatur quia quis quisquam quod repellendus sit temporibus? Molestias!</p><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aspernatur, sint tempora. Ad, adipisci dicta doloribus eaque facilis harum, illo impedit nulla pariatur quia quis quisquam quod repellendus sit temporibus? Molestias!</p>'
+      }
+    ];
+
+    var Article = React.createClass({
+      render: function () {
+        return  (
+          <article>
+              <h1>{this.props.title}</h1>
+              <h2>{this.props.author}</h2>
+              {this.props.thumbnail ? <img className="img-responsive" src={this.props.thumbnail} alt={this.props.title} /> : null}
+              <div className="content" dangerouslySetInnerHTML={{ __html: this.props.text }} />
+          </article>
+        );
+      }
+    });
+
+    var Blog = React.createClass({
+      getInitialState: function() {
+        return {
+          displayedArticles: CONTENT
+        };
+      },
+
+      render: function () {
+        return (
+          <section>
+              <div className="container">
+                {
+                  this.state.displayedArticles.map(function (el) {
+                    return <Article
+                        key={el.id}
+                        title={el.title}
+                        author={el.author}
+                        thumbnail={el.thumbnail}
+                        text={el.text}
+                    />;
+                  })
+                }
+              </div>
+          </section>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <Blog />,
+      document.getElementById('content')
+    )
+</script>
+</body>
+</html>

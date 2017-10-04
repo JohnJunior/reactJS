@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <title>HW 4</title>
+</head>
+<body>
+<div class="container">
+    <div id='content'></div>
+</div>
+
+
+<script type="text/babel">
+    var App = React.createClass({
+      getInitialState: function () {
+        return ({
+          a: 0,
+          b: 0,
+          sum: 0,
+          dif: 0,
+          mult: 0
+        });
+      },
+
+      onChangeValue: function (event) {
+        const target = event.target;
+        var a = this.state.a;
+        var b = this.state.b;
+
+        if (target.id === 'a') {
+          a = target.value !== '' ? parseFloat(target.value) : 0;
+          this.setState({
+            a: a
+          });
+        }
+
+        if (target.id === 'b') {
+          b = target.value !== '' ? parseFloat(target.value) : 0;
+          this.setState({
+            b: b
+          });
+        }
+
+        this.setState({
+          sum: a+b,
+          dif: a-b,
+          mult: a*b
+        });
+      },
+
+      render: function () {
+        return (
+          <div>
+              <div>
+                  <div className="form-group">
+                      <label htmlFor="a">a</label><input id="a" className="form-control" type="number" name="a" placeholder="0" value={this.state.a} onChange={this.onChangeValue} />
+                  </div>
+                  <div className="form-group">
+                      <label htmlFor="b">b</label><input id="b" className="form-control" type="number" name="b" placeholder="0" value={this.state.b} onChange={this.onChangeValue}/>
+                  </div>
+              </div>
+              <div className="results">
+                  <div>a + b = {this.state.sum}</div>
+                  <div>a - b = {this.state.dif}</div>
+                  <div>a * b = {this.state.mult}</div>
+              </div>
+          </div>
+        );
+      }
+    });
+
+    ReactDOM.render(
+        <App />,
+        document.getElementById('content')
+    );
+</script>
+</body>
+</html>

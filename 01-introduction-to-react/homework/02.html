@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <title>HW 2</title>
+</head>
+<body>
+<div id='content'></div>
+
+<script type="text/babel">
+    var HelloWorld = React.createClass({
+      render: function () {
+        return (
+          <h1>Hello, {this.props.name}!</h1>
+        );
+      }
+    });
+
+    var App = React.createClass({
+      getInitialState: function() {
+        return {
+          name: 'Stranger'
+        };
+      },
+
+      handleNameChange: function (event) {
+        this.setState({
+          name: event.target.value
+        });
+      },
+
+      render: function () {
+        return (
+          <div className="container">
+              <input type="text" placeholder="Write Your name ..." className="name-field" onChange={this.handleNameChange} />
+              <HelloWorld name={this.state.name ? this.state.name : 'Stranger'} />
+          </div>
+        );
+      }
+    });
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('content')
+    );
+</script>
+</body>
+</html>
